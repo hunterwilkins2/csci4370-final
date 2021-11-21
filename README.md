@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Database Management CSCI 4370 Final Project
 ## Product description
 For our project, we plan on creating a satellite tracker. We will track the statuses of satellites, waiting to be launched or in orbit, and their positions from various companies. The purpose for our product is to allow companies a web interface to view and track their satellites.
@@ -53,15 +52,3 @@ All users will be able to view the satellites owned by a company that are in orb
 - [ ] Create Company login page
     - [ ] Add cookie of the company's cid when they login
 - [ ] Redirect users to login page if they are not logged in
-=======
-# csci4370-final
-Elle - Setup initial database and help Annika with update satellite page
-<br>
-Yamin - Insert satellite page
-<br>
-Annika - Update satellite page
-<br>
-Hunter - Satellite Visualization and main page
-<br>
-Shay - Company login/register page
->>>>>>> 4f3b5d1efe8d9583668e0ab2afe6c6bfa9e65ffb
