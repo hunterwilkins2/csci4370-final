@@ -27,7 +27,7 @@ All users will be able to view the satellites owned by a company that are in orb
         - [ ] Add latitude and longitude of launch site
         - [ ] Add radius satellite is orbiting at (must be less than 2000 km)
         - [ ] Add inclination (degrees between -60 and 60)
-- [ ] Help Anna with Update satellite page
+- [ ] Help Annika with Update satellite page
 
 ### Yamin 
 - [ ] Create Insert satellite page
@@ -35,7 +35,7 @@ All users will be able to view the satellites owned by a company that are in orb
     - [ ] Insert sateliite waiting to be lauched
     - [ ] Insert satellite's initial orbit of launched satellite
 
-### Anna 
+### Annika 
 - [ ] Create Update satellite page
     - [ ] Only allow companites logged in to update satellites
     - [ ] Update status and pending launch date of satellites waiting to be launched
