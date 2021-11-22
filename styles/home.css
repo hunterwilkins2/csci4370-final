@@ -1,0 +1,31 @@
+#map {
+    width: 80%;
+}
+
+.site-color {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: red;
+}
+
+table {
+    border-collapse: collapse;
+    color: white;
+}
+
+td, th {
+    border-top: 1px solid #ababab;
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(odd) {
+    background-color: #3c5475;
+}
+
+tr:nth-child(even) {
+    background-color: #222831;
+}

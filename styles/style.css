@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: #DDDDDD;
+}
+
+.container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+header {
+    flex: 0 1 3rem;
+
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+
+    color: #edf5e1;
+    background-color: #222831;
+}
+
+.logo {
+    display: flex;
+    gap: 10px;
+    border: none;
+}
+
+.logo i {
+    font-size: 32px;
+    line-height: 1.2;
+    color: #F05454;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+header nav {
+    margin-left: auto !important;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+}
+
+header a {
+    position: relative;
+    margin: auto 0;
+    padding: 5px;
+    color: inherit;
+    text-decoration: none;
+}
+
+nav > a:hover {
+    transition: color .3s ease;
+    color: #F05454;
+}
+
+nav > a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -2px;
+    left: -2px;
+    transform: scaleX(0);
+    border-bottom: 2px solid #F05454;
+    transition: transform .3s ease;
+}
+
+nav > a:hover::before {
+    transform: scaleX(1);
+}  
+
+main {
+    flex: 1 1 auto;
+    margin: 1rem;
+}
+
+footer {
+    flex: 0 1 2rem;
+
+    text-align: center;
+    color: #edf5e1;
+    background-color: #30475E;
+}
