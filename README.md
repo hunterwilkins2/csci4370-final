@@ -19,17 +19,19 @@ All users will be able to view the satellites owned by a company that are in orb
 
 ## Responsibilities
 ### Elle 
-- [ ] Create database with the name Satellite
-- [ ] Create tables as described in the ER diagram
-    - [ ] Add password field to company table
-    - [ ] Add latitude and longitude of launch site for satellites waiting to be lauched
+
+  
+   - [ ] Add latitude and longitude of launch site for satellites waiting to be lauched
     - For satellites in orbit
         - [ ] Add latitude and longitude of launch site
         - [ ] Add radius satellite is orbiting at (must be less than 2000 km)
         - [ ] Add inclination (degrees between -60 and 60)
 - [ ] Help Annika with Update satellite page
 
-### Yamin 
+### Yamin
+- [ ] Create database with the name Satellite
+- [ ] Create tables as described in the ER diagram
+- [ ] Add password field to company table
 - [ ] Create Insert satellite page
     - [ ] Only allow companites logged in to insert new satellites
     - [ ] Insert sateliite waiting to be lauched
