@@ -3,18 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 22, 2021 at 11:54 PM
+-- Generation Time: Nov 23, 2021 at 02:12 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: ` Satellite`
@@ -29,6 +23,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `companies` (
   `company_id` int(3) UNSIGNED NOT NULL,
   `company_name` varchar(20) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `location` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -36,8 +31,8 @@ CREATE TABLE `companies` (
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`company_id`, `company_name`, `location`) VALUES
-(1, 'Yamin\'s Test Company', 'Test');
+INSERT INTO `companies` (`company_id`, `company_name`, `password`, `location`) VALUES
+(1, 'Yamin\'s Test Company', '5f4dcc3b5aa765d61d8327deb882cf99', 'Test');
 
 -- --------------------------------------------------------
 
@@ -166,7 +161,3 @@ ALTER TABLE `Pending Launch Satellite`
 --
 ALTER TABLE `satelite`
   ADD CONSTRAINT `satelite_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
