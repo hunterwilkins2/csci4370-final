@@ -24,16 +24,17 @@ $count=0;
 while($row = mysqli_fetch_array($satID)){
 
   // add each row returned into an array
-  $array[$count] = $row;
+  $array[] = $row;
   $count++;
   
 
 }
 
-print_r($array); // show all array data
-echo sizeof($array);
-// $info = $row[$count-1]+1;   
-
+$size = sizeof($array)-1;
+//print_r($array); // show all array data
+//echo $array[$size]["satellite_id"];
+$info = $array[$size]["satellite_id"]+1;
+//echo $info; 
 
 $sqlTwo = "INSERT INTO Pending (pid, satellite_id, pending_date, pending_latitude, pending_longitude)
 VALUES (null, '$info', '$launch_date', '$launch_latitiude', '$launch_longitude')";
@@ -44,8 +45,8 @@ if ($link->query($sql) === TRUE && $link->query($sqlTwo) ===TRUE) {
   header("Location: /pages/insertSatellite.php");
 
 } else {
-  // echo "Error: " . $sql . "<br>" . $link->error;
-  //echo "Error: " . $sqlTwo . "<br>" . $link->error;
+  echo "Error: " . $sql . "<br>" . $link->error;
+  echo "Error: " . $sqlTwo . "<br>" . $link->error;
 
 }
 
