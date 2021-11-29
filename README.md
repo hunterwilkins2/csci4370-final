@@ -30,10 +30,10 @@ All users will be able to view the satellites owned by a company that are in orb
 - [x] Create database with the name Satellite
 - [x] Create tables as described in the ER diagram
 - [x] Add password field to company table
-- [ ] Create Insert satellite page
-    - [ ] Only allow companites logged in to insert new satellites
-    - [ ] Insert sateliite waiting to be lauched
-    - [ ] Insert satellite's initial orbit of launched satellite
+- [x] Create Insert satellite page
+    - [x] Only allow companites logged in to insert new satellites
+    - [x] Insert sateliite waiting to be lauched
+    - [x] Insert satellite's initial orbit of launched satellite
 
 ### Annika 
 - [ ] Create Update satellite page
