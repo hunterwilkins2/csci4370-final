@@ -31,7 +31,7 @@ All users will be able to view the satellites owned by a company that are in orb
 - [x] Create tables as described in the ER diagram
 - [x] Add password field to company table
 - [x] Create Insert satellite page
-    - [x] Only allow companites logged in to insert new satellites
+    - [ ] Only allow companites logged in to insert new satellites
     - [x] Insert sateliite waiting to be lauched
     - [x] Insert satellite's initial orbit of launched satellite
 
