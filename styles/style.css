@@ -102,3 +102,9 @@ footer {
   
     
 }
+
+.success-msg{
+    position:relative; left: 390px; top:-250px;
+    color: green;
+ 
+}

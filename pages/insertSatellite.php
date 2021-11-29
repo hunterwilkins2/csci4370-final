@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +44,7 @@
 
 
 
-  <form action="addSatellite.php" method="post">
+  <form action="addSatellitePending.php" method="post">
 
 
 <div>
@@ -92,10 +95,8 @@
 
 
 
-
-
 <div class="formTwo">
-    <form action="tut1.php" method="get" class="formTwo">
+    <form action="addSatelliteLaunched.php" method="post" class="formTwo">
 
 
 <div>
@@ -104,28 +105,32 @@
 
 <div>
     <label>Satellite Model:</label>
-     <input>
+     <input type="text" name="Model" placeholder="Satellite Model" required>
 </div>
 
 <div>
     <label>Satellite Name:</label>
-     <input>
+     <input type="text" name="Name" placeholder="Satellite Name" required>
 </div>
 <div>
     <label>Launch Latitude:</label>
-     <input>
+     <input type="number"  name="Lati" placeholder="Satellite Latitude" required>
 </div>
 <div>
     <label>Launch Longitude:</label>
-     <input>
+     <input type="number" name="Longi" placeholder="Satellite Longitude" required>
 </div>
 <div>
     <label>Launched Date:</label>
-     <input type="date">
+     <input name="Date" placeholder="Launched Date" type="date">
 </div>
 <div>
-    <label>Orbital Location:</label>
-     <input>
+    <label>Altitude:</label>
+     <input name="Alt" type="number" placeholder="Altitiude" required>
+</div>
+<div>
+    <label>Inclination:</label>
+     <input  placeholder="Inclination" name="Incl" type="number" required>
 </div>
 
 
@@ -136,6 +141,17 @@
 
 </div>
 
+
+<div class="success-msg">
+  <?php
+  if( $_GET['status'] == 'success'):
+    echo 'Satellite Successfuly Entered';
+endif;
+
+
+
+  ?>
+</div>
 
 
 </main>
