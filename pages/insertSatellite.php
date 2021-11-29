@@ -1,13 +1,3 @@
-<?php
-
-
-
-?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,24 +50,24 @@
 <div/>
 <div>
     <label>Satellite Model:</label>
-     <input>
+     <input type="text" name="Model" placeholder="Satellite Model" required>
 </div>
 
 <div>
     <label>Satellite Name:</label>
-     <input>
+     <input type="text" name="Name" placeholder="Satellite Name" required>
 </div>
 <div>
     <label>Launch Latitude:</label>
-     <input>
+     <input type="number" name="Lati" placeholder="Satellite Latitiude" required>
 </div>
 <div>
     <label>Launch Longitude:</label>
-     <input>
+     <input type="number" name="Longi" placeholder="Satellite Longitude" required>
 </div>
 <div>
     <label>Pending Launch Date:</label>
-     <input type="date">
+     <input type="date" name="Date" placeholder="Pending Launch Date" required>
 </div>
 
 
