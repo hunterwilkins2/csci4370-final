@@ -27,8 +27,8 @@
           <h1>Satellite Tracker</h1>
         </a>
         <nav>
-          <a href="#">Add New Satellite</a>
-          <a href="#">Update Satellite</a>
+			<a href="./insertSatellite.php">Add New Satellite</a>
+            <a href="./updateSatellite.php">Update Satellite</a>
           <a href="#">Login</a>
         </nav>
       </header>
