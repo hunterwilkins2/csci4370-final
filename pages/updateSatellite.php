@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +9,40 @@
 
     <link rel="stylesheet" href="../styles/style.css">
 
+    <style type="text/css">
+      .error {
+	  font-size: 15px;
+	  color: red;
+      }
+    </style>
+
     <title>Satellite Tracker</title>
-</head>
-<body>
-    <?php
-        require('../util/DotEnv.php');
+  </head>
+  <body>
 
-        (new DotEnv(__DIR__ . '/../.env'))->load();
-
-        $mysqli = new mysqli(getenv("HOST"), getenv("USER"), getenv("PASSWORD"), getenv("DATABASE"));
-    ?>
     <div class="container">
-        <header>
-            <a href="../index.php" class="logo">
-                <i class="fas fa-satellite"></i>
-                <h1>Satellite Tracker</h1>
-            </a>
-            <nav>
-				<a href="./insertSatellite.php">Add New Satellite</a>
-                <a href="./updateSatellite.php">Update Satellite</a>
-                <a href="#">Login</a>
-            </nav>
-        </header>
+      <header>
+        <a href="../index.php" class="logo">
+          <i class="fas fa-satellite"></i>
+          <h1>Satellite Tracker</h1>
+        </a>
+        <nav>
+	  <a href="./insertSatellite.php">Add New Satellite</a>
+          <a href="./updateSatellite.php">Update Satellite</a>
+          <a href="#">Login</a>
+        </nav>
+      </header>
 
-        <main>
+      <main>
 
-	  <!-- This code updates satellites which are pending launch -->
+	<!-- This code updates satellites which are pending launch -->
+	<div class="formOne">
+	  
 	  <form action="updateLaunch.php" method="post">
-	    	    
+	    
 	    <div>
 	      <h2>Update Pending Satellite Launch</h2>	      
-
+	      
 	      <div/>	     
 	      <div>
 		<label>Satelite Name:</label>
@@ -61,38 +64,49 @@
 	      </div>
 
 	  </form>
+	  </div>
 
 	  <!-- This code updates satellites which are in orbit -->
-	  <form action="updateLocation.php" method="post">	
+	  <div class="formTwo">
+	    <form action="updateLocation.php" method="post">	
+	      
+	      <div>
+		<h2>Update Satellite Location</h2>
+		
+		<div>
+		  <label>Satelite Current Location:</label>
+		  <input type="text" name="Current Location" placeholder="Current Satellite Location" required>
+		</div>
+		<div>
+		  <label>Satelite New Location:</label>
+		  <input type="text" name="New Location" placeholder="New Satellite Location" required>
+		</div>
+		
+		<div>
+		  <label>Satelite Name:</label>
+		  <input type="text" name="Name" placeholder="Satellite Name" requried>
+		</div>	      	      
+		<div>
+		  <button type="submit" name="submit">Submit</button>
+		</div>
+		
+	    </form>
+
+	    </div>	    
+
+	    <div class="success-msg">
+	      <?php
+	       if( $_GET['status'] == 'success'):
+	       echo 'Satellite Successfuly Entered';
+	       endif;
+	       ?>
+	    </div>
 	    
-	    <div>
-	      <h2>Update Satelite Location</h2>
-	      
-	      <div>
-		<label>Satelite Current Location:</label>
-		<input type="text" name="Current Location" placeholder="Current Satellite Location" required>
-	      </div>
-	      <div>
-		<label>Satelite New Location:</label>
-		<input type="text" name="New Location" placeholder="New Satellite Location" required>
-	      </div>
-	      
-	      <div>
-		<label>Satelite Name:</label>
-		<input type="text" name="Name" placeholder="Satellite Name" requried>
-	      </div>	      	      
-	      <div>
-		<button type="submit" name="submit">Submit</button>
-	      </div>
-	      
-	  </form>
-	  
-        </main>
-	
-        <footer>
-            <p>CSCI 4370 Group 5 &copy Satellite Tracker Group </p>
-        </footer>
-    </div>
-</body>
+      </main>
+      
+      <footer>
+        <p>CSCI 4370 Group 5 &copy Satellite Tracker Group </p>
+      </footer>
+      </div>
+  </body>
 </html>
-<div>
