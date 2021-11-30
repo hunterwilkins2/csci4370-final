@@ -3,8 +3,6 @@
 include_once 'db.connect.php';
 error_reporting(E_ERROR | E_PARSE);
 
-
-
 $satellite_model  = $_POST['Model'];
 $satellite_name  = $_POST['Name'];
 $launch_latitiude  = $_POST['Lati'];
@@ -18,25 +16,13 @@ $launch_inclination= $_POST["Incl"];
 //update data in Satellite table
 
 $sql = "UPDATE Satellites
-SET satellite_id = null, company_id = '$company_id', satellite_name = '$satellite_name', satellite_model = '$satellite_model', types = '$typePending'
+SET satellite_name = '$satellite_name', satellite_model = '$satellite_model'
 WHERE"; 
-
-//determine satellite id
-
-$satID = mysqli_query($link,"SELECT satellite_id FROM Satellites ");
-$array = array();
-$count=0;
-while($row = mysqli_fetch_array($satID)){
-  $array[] = $row;
-  $count++;
-}
-$size = sizeof($array)-1;
-$info = $array[$size]["satellite_id"]+1;
 
 //update data in In-Orbit Satellite table
 
 $sqlTwo = "UPDATE Orbit 
-SET (orbital_id = null, satellite_id = '$info', launch_date = '$launch_date', launch_latitude = '$launch_latitiude', launch_longitude = '$launch_longitude', altitude = '$launch_altitude', inclination = '$launch_inclination'
+SET launch_date = '$launch_date', launch_latitude = '$launch_latitiude', launch_longitude = '$launch_longitude', altitude = '$launch_altitude', inclination = '$launch_inclination'
 WHERE"; 
 
 if ($link->query($sql) === TRUE && $link->query($sqlTwo) ===TRUE) {
