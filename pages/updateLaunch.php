@@ -18,12 +18,6 @@ $sql = "UPDATE Satellites
 SET satellite_name = '$satellite_name', satellite_model = '$satellite_model';
 WHERE"; 
 
-$size = sizeof($array)-1;
-//print_r($array); // show all array data
-//echo $array[$size]["satellite_id"];
-$info = $array[$size]["satellite_id"]+1;
-//echo $info; 
-
 //update data in Pending Launch Satellite table
 
 $sqlTwo = "UPDATE Pending 
