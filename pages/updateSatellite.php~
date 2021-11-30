@@ -35,7 +35,7 @@
         <main>
 
 	  <!-- This code updates satellites which are pending launch -->
-	  <form action="updateLaunch.php" method="post">
+	  <form action="tut1.php" method="get">
 	    	    
 	    <div>
 	      <h2>Update Pending Satellite Launch</h2>	      
@@ -63,7 +63,7 @@
 	  </form>
 
 	  <!-- This code updates satellites which are in orbit -->
-	  <form action="updateLocation.php" method="post">	
+	  <form action="tut1.php" method="get">	
 	    
 	    <div>
 	      <h2>Update Satelite Location</h2>
