@@ -33,8 +33,8 @@
                 <h1>Satellite Tracker</h1>
             </a>
             <nav>
-                <a href="#">Add New Satellite</a>
-                <a href="#">Update Satellite</a>
+                <a href="./pages/insertSatellite.php">Add New Satellite</a>
+                <a href="./pages/updateSatellite.php">Update Satellite</a>
                 <a href="#">Login</a>
             </nav>
         </header>
