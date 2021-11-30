@@ -3,8 +3,6 @@
 include_once 'db.connect.php';
 error_reporting(E_ERROR | E_PARSE);
 
-
-
 $satellite_model  = $_POST['Model'];
 $satellite_name  = $_POST['Name'];
 $launch_latitiude  = $_POST['Lati'];
@@ -29,6 +27,7 @@ while($row = mysqli_fetch_array($satID)){
 }
 $size = sizeof($array)-1;
 $info = $array[$size]["satellite_id"]+1;
+
 $sqlTwo = "INSERT INTO Orbit(orbital_id, satellite_id, launch_date, launch_latitude, launch_longitude, altitude, inclination)
 VALUES (null, '$info', '$launch_date', '$launch_latitiude', '$launch_longitude', '$launch_altitude', '$launch_inclination')";
 

@@ -97,7 +97,7 @@ CREATE TABLE `Satellites` (
 --
 
 INSERT INTO `Satellites` (`satellite_id`, `company_id`, `satellite_name`, `model`, `types`) VALUES
-(1, 1, 'Cool Test Satelite', '3213z4', 'Pending'),
+(1, 1, 'Cool Test Satellite', '3213z4', 'Pending'),
 (2, 1, 'MOCI', 'tz3024', 'In-Orbit'),
 (385, 1, 'Yamin Test', 'z3044', 'Pending'),
 (386, 1, 'Yamin Test', 'z3044', 'Pending'),

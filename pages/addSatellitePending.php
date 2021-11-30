@@ -18,7 +18,6 @@ VALUES (null, '$company_id', '$satellite_name', '$satellite_model', '$typePendin
 
 //insert data into satellite table for launch pending satellite 
 
-
 $satID = mysqli_query($link,"SELECT satellite_id FROM Satellites ");
 $array = array();
 $count=0;
@@ -41,7 +40,7 @@ VALUES (null, '$info', '$launch_date', '$launch_latitiude', '$launch_longitude')
 //inserts data into the pending satellite table
 
 
-//if dara is entered successfully we rendeer the same page 
+//if data is entered successfully we rendeer the same page 
 if ($link->query($sql) === TRUE && $link->query($sqlTwo) ===TRUE) {
   header("Location: /pages/insertSatellite.php?status=success");
 
