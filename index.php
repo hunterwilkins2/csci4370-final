@@ -19,12 +19,8 @@
     <script src="./scripts/sketch.js" type="text/javascript"></script>
 </head>
 <body>
-    <?php
-        require('./util/DotEnv.php');
-
-        (new DotEnv(__DIR__ . '/.env'))->load();
-
-        $mysqli = new mysqli(getenv("HOST"), getenv("USER"), getenv("PASSWORD"), getenv("DATABASE"));
+    <?php 
+        require('./util/db.connect.php')
     ?>
     <div class="container">
         <header>
