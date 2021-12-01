@@ -16,6 +16,12 @@
       }
     </style>
 
+	<?php
+	include_once 'db.connect.php';
+	$query = "SELECT pid FROM Pending";
+	$result = $link->query($query);
+	?>
+
     <title>Satellite Tracker</title>
   </head>
   <body>
@@ -45,8 +51,12 @@
 	      
 	      <div/>	     
 	      <div>
-		<label>Satelite Name:</label>
-		<input type="text" name="Name" placeholder="Satellite Name" requried>
+		<label>Satelite ID:</label>
+		<select name="sid" id="sid">
+		    while ($row = $result->fetch_assoc()) {
+			    <option value=".$row['name']">.$row['name']</option> ;
+		    }
+		</select>
 	      </div>
 	      
 	      <div>
@@ -74,22 +84,35 @@
 		<h2>Update Satellite Location</h2>
 		
 		<div>
-		  <label>Satelite Current Location:</label>
-		  <input type="text" name="Current Location" placeholder="Current Satellite Location" required>
-		</div>
+		<label>Satelite ID:</label>
+		<select name="sid" id="sid">
+            $query = "SELECT pid FROM Pending"
+		    while ($row = $result->fetch_assoc()) {
+			    <option value=".$row['name']">.$row['name']</option> ;
+		    }
+		</select>
+	      </div>
+
 		<div>
-		  <label>Satelite New Location:</label>
-		  <input type="text" name="New Location" placeholder="New Satellite Location" required>
+		  <label>Satelite New Longitude:</label>
+		  <input type="text" name="New Longitude" placeholder="New Satellite Longitude" required>
+		</div>
+		
+		<div>
+		  <label>Satelite New Latitude:</label>
+		  <input type="text" name="New Latitude" placeholder="New Satellite Latitude" required>
+		</div>
+
+		<div>
+		  <label>Satelite New Altitude:</label>
+		  <input type="text" name="New Altitude" placeholder="New Satellite Altitude" required>
 		</div>
 		
 		<div>
-		  <label>Satelite Name:</label>
-		  <input type="text" name="Name" placeholder="Satellite Name" requried>
-		</div>	      	      
-		<div>
-		  <button type="submit" name="submit">Submit</button>
+		  <label>Satelite New Inclination:</label>
+		  <input type="text" name="New Inclination" placeholder="New Satellite Inclination" required>
 		</div>
-		
+
 	    </form>
 
 	    </div>	    
