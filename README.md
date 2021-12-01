@@ -47,8 +47,8 @@ All users will be able to view the satellites owned by a company that are in orb
 - [x] Create table to show list of satellites owned by a company
 
 ### Shay
-- [ ] Create Company register page
+- [x] Create Company register page
     - [ ] Add cookie of the company's cid when they register
-- [ ] Create Company login page
+- [x] Create Company login page
     - [ ] Add cookie of the company's cid when they login
 - [ ] Redirect users to login page if they are not logged in
