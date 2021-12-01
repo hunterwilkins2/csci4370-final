@@ -85,7 +85,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($stmt->execute()){
                 setcookie("cookie", $cid); // cookie will expire when browser closes
                
-                //header("Location: login.php");
+                header("Location: login.php");
+             
             } else {
                 echo "There was an error."; // execute fail
             }
