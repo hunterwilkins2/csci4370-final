@@ -1,3 +1,7 @@
+<?php 
+    require(__DIR__ . '/util/db.connect.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +23,6 @@
     <script src="./scripts/sketch.js" type="text/javascript"></script>
 </head>
 <body>
-    <?php 
-        require('./util/db.connect.php')
-    ?>
     <div class="container">
         <header>
             <a href="./index.php" class="logo">
@@ -29,9 +30,27 @@
                 <h1>Satellite Tracker</h1>
             </a>
             <nav>
-                <a href="./pages/insertSatellite.php">Add New Satellite</a>
-                <a href="./pages/updateSatellite.php">Update Satellite</a>
-                <a href="./login/login.php">Login</a>
+                <?php
+                    if(isset($_COOKIE["cid"])) {
+                        $nameSql = "SELECT company_name FROM Companies WHERE company_id = '".$_COOKIE["cid"]."'";
+
+                        if ($result = $mysqli->query($nameSql)) {
+                            $name = $result->fetch_object()->company_name;
+                            echo '<p>Welcome, ' . $name . '</p>';
+                            echo '<a href="./pages/insertSatellite.php">Add New Satellite</a>';
+                            echo '<a href="./pages/updateSatellite.php">Update Satellite</a>';
+                            echo '<a href="?logout">Logout</a>';
+                        } 
+
+                        if(isset($_GET['logout'])) {
+                            unset($_COOKIE['cid']); 
+                            setcookie('cid', "", time()-3600, '/'); 
+                            header("Location: ./index.php");
+                        }
+                    } else {
+                        echo '<a href="./login/login.php">Login</a>';
+                    }
+                ?>
             </nav>
         </header>
 

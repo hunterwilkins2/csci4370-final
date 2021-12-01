@@ -108,3 +108,15 @@ footer {
     color: #edf5e1;
     background-color: #222831;
 }
+
+.error {
+    width: 100%;
+    padding: 1px 5px;
+
+    border-radius: 10px;
+
+    background-color: #FF5D73;
+    color: #ffffff;
+
+    text-align: center;
+}
