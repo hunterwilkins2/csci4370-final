@@ -35,7 +35,7 @@
             <nav>
                 <a href="./pages/insertSatellite.php">Add New Satellite</a>
                 <a href="./pages/updateSatellite.php">Update Satellite</a>
-                <a href="#">Login</a>
+                <a href="./login/login.php">Login</a>
             </nav>
         </header>
 
