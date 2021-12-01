@@ -16,6 +16,7 @@ All users will be able to view the satellites owned by a company that are in orb
 - Clone this repo into your htdocs folder
 - Copy [.env.example](./.env.example) to .env and change username and password to your mysql username and password
 - Import data from [mysql_data/Satellite.sql](./.mysql_data/Satellite.sql) to phpMyAdmin
+- **NOTE** Use the file [db.connect.php](./util/db.connect.php) in the util folder to connect to the database. This will ensure that everyone is using the .env to configure how to log into mysql.
 
 ## Responsibilities
 ### Elle 
@@ -46,7 +47,7 @@ All users will be able to view the satellites owned by a company that are in orb
 - [x] Show satellites on map
 - [x] Create table to show list of satellites owned by a company
 
-### Shay
+### Shea
 - [x] Create Company register page
     - [ ] Add cookie of the company's cid when they register
 - [x] Create Company login page
