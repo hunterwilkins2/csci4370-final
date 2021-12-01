@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // redirect to homepage
-                            //header("location: ../index.php");
+                            header("location: ../index.php");
                         } else{
                             // incorrect password
                             $login_err = "Invalid username or password.";
