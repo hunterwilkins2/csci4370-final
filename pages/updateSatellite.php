@@ -17,9 +17,9 @@
     </style>
 
 	<?php
-	include_once 'db.connect.php';
+	require(__DIR__ . '/../util/db.connect.php');
 	$query = "SELECT pid FROM Pending";
-	$result = $link->query($query);
+	$result = $mysqli->query($query);
 	?>
 
     <title>Satellite Tracker</title>
@@ -53,9 +53,11 @@
 	      <div>
 		<label>Satelite ID:</label>
 		<select name="sid" id="sid">
+			<?php
 		    while ($row = $result->fetch_assoc()) {
-			    <option value=".$row['name']">.$row['name']</option> ;
+			    echo '<option value="'.$row['name'].'">'.$row['name'].'</option> ';
 		    }
+			?>
 		</select>
 	      </div>
 	      
