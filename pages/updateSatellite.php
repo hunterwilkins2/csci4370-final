@@ -18,8 +18,10 @@
 
 	<?php
 	require(__DIR__ . '/../util/db.connect.php');
-	$query = "SELECT pid FROM Pending";
-	$result = $mysqli->query($query);
+	$query1 = "SELECT satellite_name FROM Satellites WHERE type = "Pending" AND company_id = ".$_COOKIE["cid"];
+	$result1 = $mysqli->query($query);
+	$query2 = "SELECT satellite_name FROM Satellites WHERE type = "In-Orbit" AND company_id = ".$_COOKIE["cid"];
+	$result2 = $mysqli->query($query);
 	?>
 
     <title>Satellite Tracker</title>
@@ -51,19 +53,29 @@
 	      
 	      <div/>	     
 	      <div>
-		<label>Satelite ID:</label>
-		<select name="sid" id="sid">
+		<label>Satellite Name:</label>
+		<select name="Satellite Name" id="Satellite Name">
 			<?php
-		    while ($row = $result->fetch_assoc()) {
-			    echo '<option value="'.$row['name'].'">'.$row['name'].'</option> ';
+		    while ($row = $result1->fetch_assoc()) {
+			    echo '<option value="'.$row['satellite_name'].'">'.$row['satellite_name'].'</option> ';
 		    }
 			?>
 		</select>
 	      </div>
 	      
+		  <div>
+		<label>Satellite Model:</label>
+		<input type="text" name="Model" placeholder="Satellite Model" required>
+	      </div> 
+
 	      <div>
-		<label>Launch Location:</label>
-		<input type="text" name="Location" placeholder="Satellite Location" required>
+		<label>Launch Latitude:</label>
+		<input type="text" name="Lati" placeholder="Satellite Launch Latitude" required>
+	      </div>
+
+		  <div>
+		  <label>Launch Longitude:</label>
+		<input type="text" name="Longi" placeholder="Satellite Launch Longitude" required>
 	      </div>
 
 	      <div>
@@ -86,33 +98,39 @@
 		<h2>Update Satellite Location</h2>
 		
 		<div>
-		<label>Satelite ID:</label>
-		<select name="sid" id="sid">
-            $query = "SELECT pid FROM Pending"
-		    while ($row = $result->fetch_assoc()) {
-			    <option value=".$row['name']">.$row['name']</option> ;
+		<label>Satellite Name:</label>
+		<select name="Satelite Name" id="Satellite Name">
+		<?php
+		    while ($row = $result2->fetch_assoc()) {
+			    echo '<option value="'.$row['satellite_name'].'">'.$row['satellite_name'].'</option> ';
 		    }
+			?>
 		</select>
+	      </div>
+
+		  <div>
+		<label>Satellite Model:</label>
+		<input type="text" name="Model" placeholder="Satellite Model" required>
 	      </div>
 
 		<div>
 		  <label>Satelite New Longitude:</label>
-		  <input type="text" name="New Longitude" placeholder="New Satellite Longitude" required>
+		  <input type="text" name="Longi" placeholder="New Satellite Longitude" required>
 		</div>
 		
 		<div>
 		  <label>Satelite New Latitude:</label>
-		  <input type="text" name="New Latitude" placeholder="New Satellite Latitude" required>
+		  <input type="text" name="Lati" placeholder="New Satellite Latitude" required>
 		</div>
 
 		<div>
 		  <label>Satelite New Altitude:</label>
-		  <input type="text" name="New Altitude" placeholder="New Satellite Altitude" required>
+		  <input type="text" name="Alt" placeholder="New Satellite Altitude" required>
 		</div>
 		
 		<div>
 		  <label>Satelite New Inclination:</label>
-		  <input type="text" name="New Inclination" placeholder="New Satellite Inclination" required>
+		  <input type="text" name="Incl" placeholder="New Satellite Inclination" required>
 		</div>
 
 	    </form>
