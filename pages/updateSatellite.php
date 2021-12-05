@@ -19,9 +19,9 @@
 	<?php
 	require(__DIR__ . '/../util/db.connect.php');
 	$query1 = "SELECT satellite_name FROM Satellites WHERE type = 'Pending' AND company_id = ".$_COOKIE["cid"];
-	$result1 = $mysqli->query1($query1);
+	$result1 = $mysqli->query($query1);
 	$query2 = "SELECT satellite_name FROM Satellites WHERE type = 'In-Orbit' AND company_id = ".$_COOKIE["cid"];
-	$result2 = $mysqli->query2($query1);
+	$result2 = $mysqli->query($query2);
 	?>
 
     <title>Satellite Tracker</title>
@@ -56,8 +56,10 @@
 		<label>Satellite Name:</label>
 		<select name="Satellite Name" id="Satellite Name">
 			<?php
-		    while ($row = $result1->fetch_assoc()) {
-			    echo '<option value="'.$row['satellite_name'].'">'.$row['satellite_name'].'</option> ';
+			echo 'test';
+		    while ($row = $result1->fetch_object()) {
+				echo 'test';
+			    echo '<option value="'.$row->satellite_name.'">'.$row->satellite_name.'</option> ';
 		    }
 			?>
 		</select>
