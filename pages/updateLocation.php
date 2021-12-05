@@ -1,15 +1,14 @@
 <?php
 
-include_once 'db.connect.php';
-error_reporting(E_ERROR | E_PARSE);
+require(__DIR__ . '/../util/db.connect.php');
 
-$satellite_name = $_POST['Name']
+$satellite_name = $_POST['Name'];
 $satellite_model  = $_POST['Model'];
 $satellite_id  = $_POST['id'];
 $latitiude  = $_POST['Lati'];
 $longitude  = $_POST['Longi'];
 $launch_date = $_POST['Date'];
-$company_id = 1; //1 for now but will get this from the cookie when it is done
+$company_id = $_COOKIE['cid']; //1 for now but will get this from the cookie when it is done
 $typeLaunched = "In-Orbit";
 $altitude= $_POST["Alt"];
 $inclination= $_POST["Incl"];
@@ -18,22 +17,22 @@ $launch_location = $_POST["Location"];
 //update data in Satellite table
 
 $sql = "UPDATE Satellites
-SET satellite_model = '$satellite_model';
-WHERE satellite_name = '$satellite_name"; 
+SET model = '".$satellite_model."'
+WHERE satellite_name = '".$satellite_name."'"; 
 
 //update data in In-Orbit Satellite table
 
-$sqlTwo = "UPDATE Orbit 
-SET latitude = '$latitiude', longitude = '$longitude', altitude = '$altitude', inclination = '$inclination'
-WHERE"; 
+$sqlTwo = "UPDATE `In-Orbit` I
+SET launch_latitude = '".$latitiude."', launch_latitude = '".$longitude."', altitude = '".$altitude."', inclination = '".$inclination."'
+WHERE I.satellite_id = (SELECT satellite_id FROM Satellites WHERE satellite_name = '".$satellite_name."')"; 
 
-if ($link->query($sql) === TRUE && $link->query($sqlTwo) ===TRUE) {
-  header("Location: /pages/insertSatellite.php?status=success");
-} else {
-  echo "Error: " . $sql . "<br>" . $link->error;
-  echo "Error: " . $sqlTwo . "<br>" . $link->error;
+if(!$mysqli->query($sql)) {
+  die("Error: Could not update satellite. " . $mysqli->error);
 }
 
-$link->close();
+if(!$mysqli->query($sqlTwo)) {
+  die("Error: Could not update satellite. " . $mysqli->error);
+}
 
+header("Location: ./updateSatellite.php?status=success");
 ?>

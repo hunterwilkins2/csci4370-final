@@ -1,157 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="../resources/favicon.ico" type="image/x-icon">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="shortcut icon" href="../resources/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="../styles/style.css">
+<link rel="stylesheet" href="../styles/style.css">
 
-    <style type="text/css">
-      .error {
-	  font-size: 15px;
-	  color: red;
-      }
-    </style>
+<style type="text/css">
+	.error {
+	font-size: 15px;
+	color: red;
+	}
+</style>
 
-	<?php
-	require(__DIR__ . '/../util/db.connect.php');
-	$query1 = "SELECT satellite_name FROM Satellites WHERE type = 'Pending' AND company_id = ".$_COOKIE["cid"];
-	$result1 = $mysqli->query($query1);
-	$query2 = "SELECT satellite_name FROM Satellites WHERE type = 'In-Orbit' AND company_id = ".$_COOKIE["cid"];
-	$result2 = $mysqli->query($query2);
-	?>
+<?php
+require(__DIR__ . '/../util/db.connect.php');
+$query1 = "SELECT satellite_name FROM Satellites WHERE type = 'Pending' AND company_id = ".$_COOKIE["cid"];
+$result1 = $mysqli->query($query1);
+$query2 = "SELECT satellite_name FROM Satellites WHERE type = 'In-Orbit' AND company_id = ".$_COOKIE["cid"];
+$result2 = $mysqli->query($query2);
+?>
 
-    <title>Satellite Tracker</title>
-  </head>
-  <body>
+<title>Satellite Tracker</title>
+</head>
+<body>
 
-    <div class="container">
-      <header>
-        <a href="../index.php" class="logo">
-          <i class="fas fa-satellite"></i>
-          <h1>Satellite Tracker</h1>
-        </a>
-        <nav>
-	  <a href="./insertSatellite.php">Add New Satellite</a>
-          <a href="./updateSatellite.php">Update Satellite</a>
-          <a href="#">Login</a>
-        </nav>
-      </header>
+<div class="container">
+	<header>
+	<a href="../index.php" class="logo">
+		<i class="fas fa-satellite"></i>
+		<h1>Satellite Tracker</h1>
+	</a>
+	<nav>
+	<a href="./insertSatellite.php">Add New Satellite</a>
+		<a href="./updateSatellite.php">Update Satellite</a>
+		<a href="#">Login</a>
+	</nav>
+	</header>
 
-      <main>
+	<main>
 
-	<!-- This code updates satellites which are pending launch -->
-	<div class="formOne">
-	  
-	  <form action="updateLaunch.php" method="post">
-	    
-	    <div>
-	      <h2>Update Pending Satellite Launch</h2>	      
-	      
-	      <div/>	     
-	      <div>
-		<label>Satellite Name:</label>
-		<select name="Satellite Name" id="Satellite Name">
-			<?php
-			echo 'test';
-		    while ($row = $result1->fetch_object()) {
-				echo 'test';
-			    echo '<option value="'.$row->satellite_name.'">'.$row->satellite_name.'</option> ';
-		    }
-			?>
-		</select>
-	      </div>
-	      
-		  <div>
-		<label>Satellite Model:</label>
-		<input type="text" name="Model" placeholder="Satellite Model" required>
-	      </div> 
-
-	      <div>
-		<label>Launch Latitude:</label>
-		<input type="text" name="Lati" placeholder="Satellite Launch Latitude" required>
-	      </div>
-
-		  <div>
-		  <label>Launch Longitude:</label>
-		<input type="text" name="Longi" placeholder="Satellite Launch Longitude" required>
-	      </div>
-
-	      <div>
-		<label>Pending Launch Date:</label>
-		<input type="date" name="Date" placeholder="Pending Launch Date" required>
-	      </div>	      	   
-
-	      <div>
-		<button type="submit" name="submit">Submit</button>
-	      </div>
-
-	  </form>
-	  </div>
-
-	  <!-- This code updates satellites which are in orbit -->
-	  <div class="formTwo">
-	    <form action="updateLocation.php" method="post">	
-	      
-	      <div>
-		<h2>Update Satellite Location</h2>
+<!-- This code updates satellites which are pending launch -->
+<div class="formOne">
+	
+	<form action="updateLaunch.php" method="post">
+	
+	<div>
+		<h2>Update Pending Satellite Launch</h2>	      
 		
+		<div/>	     
 		<div>
-		<label>Satellite Name:</label>
-		<select name="Satelite Name" id="Satellite Name">
+	<label>Satellite Name:</label>
+	<select name="Satellite Name" id="Satellite Name">
 		<?php
-		    while ($row = $result2->fetch_assoc()) {
-			    echo '<option value="'.$row['satellite_name'].'">'.$row['satellite_name'].'</option> ';
-		    }
-			?>
+		while ($row = $result1->fetch_object()) {
+			echo '<option value="'.$row->satellite_name.'">'.$row->satellite_name.'</option> ';
+		}
+		?>
+	</select>
+		</div>
+		
+		<div>
+	<label>Satellite Model:</label>
+	<input type="text" name="Model" placeholder="Satellite Model" required>
+		</div> 
+
+		<div>
+	<label>Launch Latitude:</label>
+	<input type="text" name="Lati" placeholder="Satellite Launch Latitude" required>
+		</div>
+
+		<div>
+		<label>Launch Longitude:</label>
+	<input type="text" name="Longi" placeholder="Satellite Launch Longitude" required>
+		</div>
+
+		<div>
+	<label>Pending Launch Date:</label>
+	<input type="date" name="Date" placeholder="Pending Launch Date" required>
+		</div>	      	   
+
+		<div>
+	<button type="submit" name="submit">Submit</button>
+		</div>
+
+	</form>
+	</div>
+
+	<!-- This code updates satellites which are in orbit -->
+	<div class="formTwo">
+	<h2>Update Satellite Location</h2>
+	<form method="get" id="satelliteName">
+		<select name="name" onchange="this.form.submit()">
+		<?php
+			while ($row = $result2->fetch_object()) {
+				$names[] = $row;
+			}
+
+			if(!isset($_GET['name'])) {
+				$_GET['name'] = $names[0]->satellite_name;
+			}
+
+			foreach($names as $name) {
+				if($name->satellite_name == $_GET['name']) {
+					echo '<option value="'.$name->satellite_name.'" selected>'.$name->satellite_name.'</option> ';
+				} else {
+					echo '<option value="'.$name->satellite_name.'">'.$name->satellite_name.'</option> ';
+				}
+			}
+		?>
 		</select>
-	      </div>
+	</form>
 
-		  <div>
-		<label>Satellite Model:</label>
-		<input type="text" name="Model" placeholder="Satellite Model" required>
-	      </div>
-
-		<div>
-		  <label>Satelite New Longitude:</label>
-		  <input type="text" name="Longi" placeholder="New Satellite Longitude" required>
+	<form action="updateLocation.php" method="post">	
+		<?php
+		$details = "SELECT * FROM `In-Orbit` I INNER JOIN (SELECT * FROM Satellites S WHERE S.satellite_name = '".$_GET['name']."') N ON N.satellite_id = I.satellite_id";
+		if($details_result = $mysqli->query($details)) {
+			while ($data = $details_result->fetch_object()) {
+				$details_arr = $data;
+			}
+		}
+		?>
+			<div>
+		<label>Satellite Name:</label>
+		<?php
+		echo '<input type="text" name="Name" value="'. $details_arr->satellite_name .'" readonly required>'
+		?>
 		</div>
-		
 		<div>
-		  <label>Satelite New Latitude:</label>
-		  <input type="text" name="Lati" placeholder="New Satellite Latitude" required>
-		</div>
-
-		<div>
-		  <label>Satelite New Altitude:</label>
-		  <input type="text" name="Alt" placeholder="New Satellite Altitude" required>
-		</div>
-		
-		<div>
-		  <label>Satelite New Inclination:</label>
-		  <input type="text" name="Incl" placeholder="New Satellite Inclination" required>
+	<label>Satellite Model:</label>
+	<?php
+	echo '<input type="text" name="Model" value="'. $details_arr->model .'" required>'
+	?>
 		</div>
 
-	    </form>
+	<div>
+		<label>Satelite New Longitude:</label>
+		<?php
+		echo '<input type="text" name="Longi" value="'. $details_arr->launch_longitude.'" required>'
+		?>
+	</div>
+	
+	<div>
+		<label>Satelite New Latitude:</label>
+		<?php
+		echo '<input type="text" name="Lati" value="'. $details_arr->launch_latitude.'" required>'
+		?>
+	</div>
 
-	    </div>	    
+	<div>
+		<label>Satelite New Altitude:</label>
+		<?php
+		echo '<input type="text" name="Alt" value="'. $details_arr->altitude.'" required>'
+		?>
+	</div>
+	
+	<div>
+		<label>Satelite New Inclination:</label>
+		<?php
+		echo '<input type="text" name="Incl" value="'. $details_arr->inclination.'" required>'
+		?>
+	</div>
 
-	    <div class="success-msg">
-	      <?php
-	       if( $_GET['status'] == 'success'):
-	       echo 'Satellite Successfuly Entered';
-	       endif;
-	       ?>
-	    </div>
-	    
-      </main>
-      
-      <footer>
-        <p>CSCI 4370 Group 5 &copy Satellite Tracker Group </p>
-      </footer>
-      </div>
-  </body>
+	<div>
+		<button type="submit" name="submit">Submit</button>
+	</div>
+
+	</form>
+
+	</div>	    
+
+	<div class="success-msg">
+		<?php
+		if( $_GET['status'] == 'success'):
+		echo 'Satellite Successfuly Entered';
+		endif;
+		?>
+	</div>
+	
+	</main>
+	
+	<footer>
+	<p>CSCI 4370 Group 5 &copy Satellite Tracker Group </p>
+	</footer>
+	</div>
+</body>
 </html>
