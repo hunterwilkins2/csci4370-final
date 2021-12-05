@@ -19,9 +19,9 @@
 	<?php
 	require(__DIR__ . '/../util/db.connect.php');
 	$query1 = "SELECT satellite_name FROM Satellites WHERE type = 'Pending' AND company_id = ".$_COOKIE["cid"];
-	$result1 = $mysqli->query($query);
+	$result1 = $mysqli->query1($query1);
 	$query2 = "SELECT satellite_name FROM Satellites WHERE type = 'In-Orbit' AND company_id = ".$_COOKIE["cid"];
-	$result2 = $mysqli->query($query);
+	$result2 = $mysqli->query2($query1);
 	?>
 
     <title>Satellite Tracker</title>
