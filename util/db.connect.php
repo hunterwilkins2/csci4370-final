@@ -7,6 +7,7 @@
 
     // Check connection
     if ($mysqli -> connect_errno) {
-        die("ERROR: Could not connect to the database.");
+
+        die("ERROR: Could not connect to the database. " . $mysqli->connect_error);
     }
 ?>
