@@ -127,42 +127,48 @@ $result2 = $mysqli->query($query2);
 			<div>
 		<label>Satellite Name:</label>
 		<?php
-		echo '<input type="text" name="Name" value="'. $details_arr->satellite_name .'" readonly required>'
+		echo '<input type="text" name="Name" value="'. $details_arr->satellite_name .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid name" readonly required>'
 		?>
 		</div>
 		<div>
 	<label>Satellite Model:</label>
 	<?php
-	echo '<input type="text" name="Model" value="'. $details_arr->model .'" required>'
+	echo '<input type="text" name="Model" value="'. $details_arr->model .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid model" required>';
 	?>
 		</div>
 
 	<div>
 		<label>Satelite New Longitude:</label>
 		<?php
-		echo '<input type="text" name="Longi" value="'. $details_arr->launch_longitude.'" required>'
+		echo '<input type="number" name="Longi" value="'. $details_arr->launch_longitude.'" min="-90" max="90" step="0.01" required>'
 		?>
 	</div>
 	
 	<div>
 		<label>Satelite New Latitude:</label>
 		<?php
-		echo '<input type="text" name="Lati" value="'. $details_arr->launch_latitude.'" required>'
+		echo '<input type="number" name="Lati" id="lat" onchange="setMin()" value="'. $details_arr->launch_latitude.'" min="-90" max="90" step="0.01" required>'
 		?>
 	</div>
 
 	<div>
 		<label>Satelite New Altitude:</label>
 		<?php
-		echo '<input type="text" name="Alt" value="'. $details_arr->altitude.'" required>'
+		echo '<input type="number" name="Alt" value="'. $details_arr->altitude.'" min="250" max="2000" step="0.01" required>'
 		?>
 	</div>
 	
 	<div>
 		<label>Satelite New Inclination:</label>
 		<?php
-		echo '<input type="text" name="Incl" value="'. $details_arr->inclination.'" required>'
+		echo '<input type="number" id="incl" name="Incl" value="'. $details_arr->inclination.'" step="0.01" title="Cannot be less than than latitude" required>'
 		?>
+		<script>
+			setMin();
+			function setMin() {
+				document.getElementById("incl").min = document.getElementById("lat").value;
+			}
+		</script>
 	</div>
 
 	<div>

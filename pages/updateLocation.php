@@ -23,7 +23,7 @@ WHERE satellite_name = '".$satellite_name."'";
 //update data in In-Orbit Satellite table
 
 $sqlTwo = "UPDATE `In-Orbit` I
-SET launch_latitude = '".$latitiude."', launch_latitude = '".$longitude."', altitude = '".$altitude."', inclination = '".$inclination."'
+SET launch_latitude = '".$latitiude."', launch_longitude = '".$longitude."', altitude = '".$altitude."', inclination = '".$inclination."'
 WHERE I.satellite_id = (SELECT satellite_id FROM Satellites WHERE satellite_name = '".$satellite_name."')"; 
 
 if(!$mysqli->query($sql)) {
