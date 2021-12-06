@@ -34,7 +34,14 @@
 #info {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
+}
+
+#info > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 table {
@@ -44,7 +51,7 @@ table {
 
 td, th {
     border-top: 1px solid #ababab;
-    padding: 8px;
+    padding: 8px 24px;
     text-align: center;
 }
 

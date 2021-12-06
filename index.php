@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="./styles/home.css">
 
     <title>Satellite Tracker</title>
-
     
     <script src="./scripts/libraries/p5.min.js" type="text/javascript"></script>
     <script src="./scripts/libraries/mappa.js" type="text/javascript"></script>
@@ -56,10 +55,34 @@
 
         <main>
             <div class="company-select">
-                <h1>Space X</h1>
+                <?php
+                    $sql = 'SELECT * FROM Companies';
+                    error_reporting(E_ERROR | E_PARSE);
+
+                    if ($result = $mysqli->query($sql)) {
+                        while ($data = $result->fetch_object()) {
+                            $companies[] = $data;
+                        }
+                    }
+
+                    if(!isset($_GET['company'])) {
+                        $_GET['company'] = $companies[0]->company_name;
+                    }
+
+                    echo '<h1>' . $_GET['company'] . '</h1>';
+                ?>
                 <form method="get">
-                    <select name="company" id="company">
-                        <option value="spacex">Space X</option>
+                    <select name="company" id="company" onchange="this.form.submit()">
+                        <?php
+                            foreach($companies as $company) {
+                                if($company->company_name == $_GET['company']) {
+                                    echo '<option value="'.$company->company_name.'" selected>'.$company->company_name.'</option>';
+
+                                } else {
+                                    echo '<option value="'.$company->company_name.'">'.$company->company_name.'</option>';
+                                }
+                            }
+                        ?>
                     </select>
                 </form>
             </div>
@@ -69,6 +92,8 @@
                     <h2>Satellites in orbit</h2>
                     <table id="orbit-table">
                         <tr>
+                            <th>Satellite Name</th>
+                            <th>Model</th>
                             <th>Launch Date</th>
                             <th>Launch Site Latitude</th>
                             <th>Launch Site Longitude</th>
@@ -77,33 +102,32 @@
                             <th>Color</th>
                             <th>Display</th>
                         </tr>
-                        <tr>
-                            <td>10/18/2021</td>
-                            <td>28.6272</td>
-                            <td>-80.6209</td>
-                            <td>408</td>
-                            <td>30.2</td>
-                            <td class="map-label"><span class="orbit-color"></td>
-                            <td><input type="checkbox" checked>
-                        </tr>
-                        <tr>
-                            <td>8/22/2020</td>
-                            <td>37.09</td>
-                            <td>-40.92</td>
-                            <td>602</td>
-                            <td>-70.3</td>
-                            <td class="map-label"><span class="orbit-color"></td>
-                            <td><input type="checkbox" checked>
-                        </tr>
-                        <tr>
-                            <td>2/9/2019</td>
-                            <td>34.5813</td>
-                            <td>-120.6266</td>
-                            <td>543</td>
-                            <td>50.1</td>
-                            <td class="map-label"><span class="orbit-color"></td>
-                            <td><input type="checkbox" checked>
-                        </tr>
+                        <?php
+                            $launched_sql = "SELECT * FROM `In-Orbit` O
+                            INNER JOIN Satellites S ON S.satellite_id = O.satellite_id 
+                            INNER JOIN (SELECT * FROM Companies WHERE company_name = '".addslashes(trim($_GET['company']))."') C 
+                            ON S.company_id = C.company_id";
+
+                            if ($result = $mysqli->query($launched_sql)) {
+                                while ($data = $result->fetch_object()) {
+                                    $launched[] = $data;
+                                }
+                            }
+
+                            foreach($launched as $launch) {
+                                echo '<tr>';
+                                echo '<td>'.$launch->satellite_name.'</td>';
+                                echo '<td>'.$launch->model.'</td>';
+                                echo '<td>'.$launch->launch_date.'</td>';
+                                echo '<td>'.$launch->launch_latitude.'</td>';
+                                echo '<td>'.$launch->launch_longitude.'</td>';
+                                echo '<td>'.$launch->altitude.'</td>';
+                                echo '<td>'.$launch->inclination.'</td>';
+                                echo '<td class="map-label"><span class="orbit-color"></td>';
+                                echo '<td><input type="checkbox" checked>';
+                                echo '</tr>';
+                            }
+                        ?>
                     </table>
                 </div>
 
@@ -111,26 +135,38 @@
                     <h2>Satellites waiting to be launched</h2>
                     <table id="launch-table">
                         <tr>
+                            <th>Satellite Name</th>
+                            <th>Model</th>
                             <th>Pending Launch Date</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>Color</th>
                             <th>Display</th>
                         </tr>
-                        <tr>
-                            <td>10/2/2022</td>
-                            <td>28.6272</td>
-                            <td>-80.6209</td>
-                            <td class="map-label"><span class="site-color"></td>
-                            <td><input type="checkbox" checked>
-                        </tr>
-                        <tr>
-                            <td>5/30/2024</td>
-                            <td>34.5813</td>
-                            <td>-120.6266</td>
-                            <td class="map-label"><span class="site-color"></td>
-                            <td><input type="checkbox" checked>
-                        </tr>
+                        <?php
+                            $pending_sql = "SELECT * FROM Pending P 
+                                INNER JOIN Satellites S ON S.satellite_id = P.satellite_id 
+                                INNER JOIN (SELECT * FROM Companies WHERE company_name = '".addslashes(trim($_GET['company']))."') C 
+                                ON S.company_id = C.company_id";
+
+                            if ($result = $mysqli->query($pending_sql)) {
+                                while ($data = $result->fetch_object()) {
+                                    $pendings[] = $data;
+                                }
+                            }
+                            
+                            foreach($pendings as $pending) {
+                                echo '<tr>';
+                                echo '<td>'.$pending->satellite_name.'</td>';
+                                echo '<td>'.$pending->model.'</td>';
+                                echo '<td>'.$pending->pending_date.'</td>';
+                                echo '<td>'.$pending->pending_latitude.'</td>';
+                                echo '<td>'.$pending->pending_longitude.'</td>';
+                                echo '<td class="map-label"><span class="site-color"></td>';
+                                echo '<td><input type="checkbox" checked>';
+                                echo '</tr>';
+                            }
+                        ?>
                     </table>
                 </div>
             </div>

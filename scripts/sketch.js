@@ -96,6 +96,7 @@ function cacheGroundTrace(arr) {
     for (let index = 0; index < arr.length; index++) {
         let currentOrbit = arr[index];
 
+        console.log(parseFloat(currentOrbit.Inclination));
         currentOrbit['GroundTrack'] = getGroundTrack(
             new Date(currentOrbit['Launch Date']),
             parseFloat(currentOrbit['Launch Site Latitude']), 
@@ -117,7 +118,7 @@ function getGroundTrack(epoch, latitude, longitude, altitude, inclination) {
     const deltaTime = orbits * T / timeStep;
     const earthRotationPerOrbit = T * degreesPerSecond;
     const deltaRotation = earthRotationPerOrbit / timeStep;
-
+    console.log(phase);
     let groundTrack = [];
     let long;
     for (let t = 0; t < orbits * T; t += deltaTime) {
