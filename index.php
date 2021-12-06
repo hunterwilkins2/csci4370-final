@@ -119,10 +119,10 @@
                                 echo '<td>'.$launch->satellite_name.'</td>';
                                 echo '<td>'.$launch->model.'</td>';
                                 echo '<td>'.$launch->launch_date.'</td>';
-                                echo '<td>'.$launch->launch_latitude.'</td>';
-                                echo '<td>'.$launch->launch_longitude.'</td>';
-                                echo '<td>'.$launch->altitude.'</td>';
-                                echo '<td>'.$launch->inclination.'</td>';
+                                echo '<td>'.$launch->launch_latitude.'&deg</td>';
+                                echo '<td>'.$launch->launch_longitude.'&deg</td>';
+                                echo '<td>'.$launch->altitude.' km</td>';
+                                echo '<td>'.$launch->inclination.'&deg</td>';
                                 echo '<td class="map-label"><span class="orbit-color"></td>';
                                 echo '<td><input type="checkbox" checked>';
                                 echo '</tr>';
@@ -160,8 +160,8 @@
                                 echo '<td>'.$pending->satellite_name.'</td>';
                                 echo '<td>'.$pending->model.'</td>';
                                 echo '<td>'.$pending->pending_date.'</td>';
-                                echo '<td>'.$pending->pending_latitude.'</td>';
-                                echo '<td>'.$pending->pending_longitude.'</td>';
+                                echo '<td>'.$pending->pending_latitude.'&deg</td>';
+                                echo '<td>'.$pending->pending_longitude.'&deg</td>';
                                 echo '<td class="map-label"><span class="site-color"></td>';
                                 echo '<td><input type="checkbox" checked>';
                                 echo '</tr>';
