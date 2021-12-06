@@ -35,6 +35,7 @@ function setup(){
     let launchTable = document.getElementById('launch-table');
 
     orbitArr = parseTableToObject(orbitTable);
+    console.log(orbitArr);
     setLabelColors(orbitArr);
     cacheGroundTrace(orbitArr);
 
@@ -85,7 +86,7 @@ function drawLaunchSites() {
     strokeWeight(1);
     for (let index = 0; index < launchArr.length; index++) {
         if(launchArr[index].Display.checked) {
-            const site = myMap.latLngToPixel(launchArr[index].Latitude, launchArr[index].Longitude);
+            const site = myMap.latLngToPixel(parseFloat(launchArr[index].Latitude), parseFloat(launchArr[index].Longitude));
             fill(launchArr[index].Color.style.backgroundColor);
             ellipse(site.x, site.y, 15, 15);
         }
