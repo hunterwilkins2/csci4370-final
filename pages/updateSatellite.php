@@ -35,9 +35,27 @@ $result2 = $mysqli->query($query2);
 		<h1>Satellite Tracker</h1>
 	</a>
 	<nav>
-	<a href="./insertSatellite.php">Add New Satellite</a>
-		<a href="./updateSatellite.php">Update Satellite</a>
-		<a href="#">Login</a>
+	<?php
+		if(isset($_COOKIE["cid"])) {
+			$nameSql = "SELECT company_name FROM Companies WHERE company_id = '".$_COOKIE["cid"]."'";
+
+			if ($result = $mysqli->query($nameSql)) {
+				$name = $result->fetch_object()->company_name;
+				echo '<p>Welcome, ' . $name . '</p>';
+				echo '<a href="./insertSatellite.php">Add New Satellite</a>';
+				echo '<a href="./updateSatellite.php">Update Satellite</a>';
+				echo '<a href="?logout">Logout</a>';
+			} 
+
+			if(isset($_GET['logout'])) {
+				unset($_COOKIE['cid']); 
+				setcookie('cid', "", time()-3600, '/'); 
+				header("Location: ../index.php");
+			}
+		} else {
+			header("Location: ../login/login.php");
+		}
+	?>
 	</nav>
 	</header>
 
