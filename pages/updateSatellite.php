@@ -63,42 +63,73 @@ $result2 = $mysqli->query($query2);
 
 <!-- This code updates satellites which are pending launch -->
 <div class="formOne">
+<h2>Update Pending Satellite Launch</h2>	     
+<form method="get" id="satelliteName">
+		<select name="name" onchange="this.form.submit()">
+		<?php
+			while ($row = $result1->fetch_object()) {
+				$names[] = $row;
+			}
+
+			if(!isset($_GET['name'])) {
+				$_GET['name'] = $names[0]->satellite_name;
+			}
+
+			foreach($names as $name) {
+				if($name->satellite_name == $_GET['name']) {
+					echo '<option value="'.$name->satellite_name.'" selected>'.$name->satellite_name.'</option> ';
+				} else {
+					echo '<option value="'.$name->satellite_name.'">'.$name->satellite_name.'</option> ';
+				}
+			}
+		?>
+		</select>
+	</form>
 	
 	<form action="updateLaunch.php" method="post">
-	
-	<div>
-		<h2>Update Pending Satellite Launch</h2>	      
-		
-		<div/>	     
-		<div>
-	<label>Satellite Name:</label>
-	<select name="Satellite Name" id="Satellite Name">
-		<?php
-		while ($row = $result1->fetch_object()) {
-			echo '<option value="'.$row->satellite_name.'">'.$row->satellite_name.'</option> ';
+	<?php
+		$details = "SELECT * FROM `Pending` P INNER JOIN (SELECT * FROM Satellites S WHERE S.satellite_name = '".$_GET['name']."') N ON N.satellite_id = P.satellite_id";
+		if($details_result = $mysqli->query($details)) {
+			while ($data = $details_result->fetch_object()) {
+				$details_arr = $data;
+			}
 		}
+		?>
+	<div>
+		
+		<label>Satellite Name:</label>
+		<?php
+		echo '<input type="text" name="Name" value="'. $details_arr->satellite_name .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid name" readonly required>'
 		?>
 	</select>
 		</div>
 		
 		<div>
 	<label>Satellite Model:</label>
-	<input type="text" name="Model" placeholder="Satellite Model" required>
+		<?php
+		echo '<input type="text" name="Model" value="'. $details_arr->model .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid model" required>'
+		?>
 		</div> 
 
 		<div>
 	<label>Launch Latitude:</label>
-	<input type="text" name="Lati" placeholder="Satellite Launch Latitude" required>
+		<?php
+		echo '<input type="number" name="Lati" value="'. $details_arr->pending_latitude .'" min="-90" max="90" step="0.01" required>'
+		?>
 		</div>
 
 		<div>
 		<label>Launch Longitude:</label>
-	<input type="text" name="Longi" placeholder="Satellite Launch Longitude" required>
+		<?php
+		echo '<input type="number" name="Longi" value="'. $details_arr->pending_longitude .'" min="-90" max="90" step="0.01" required>'
+		?>
 		</div>
 
 		<div>
 	<label>Pending Launch Date:</label>
-	<input type="date" name="Date" placeholder="Pending Launch Date" required>
+		<?php
+		echo '<input type="date" name="Date" value="'. $details_arr->launch_date .'" required>'
+		?>
 		</div>	      	   
 
 		<div>

@@ -1,39 +1,37 @@
 <?php
 
-include_once 'db.connect.php';
-error_reporting(E_ERROR | E_PARSE);
-
+require(__DIR__ . '/../util/db.connect.php');
 
 $satellite_model  = $_POST['Model'];
 $satellite_name  = $_POST['Name'];
 $launch_latitiude  = $_POST['Lati'];
 $launch_longitude  = $_POST['Longi'];
 $launch_date = $_POST['Date'];
-$company_id = 1; //1 for now but will get this from the cookie when it is done
+$company_id = $_COOKIE['cid']; //1 for now but will get this from the cookie when it is done
 $typePending = "Pending";
 
 //update data in Satellite table
 
 $sql = "UPDATE Satellites
-SET satellite_name = '$satellite_name', satellite_model = '$satellite_model';
-WHERE"; 
+SET model = '".$satellite_model."'
+WHERE satellite_name = '".$satellite_name."'"; 
 
 //update data in Pending Launch Satellite table
 
-$sqlTwo = "UPDATE Pending 
-SET pending_date = '$launch_date', pending_latitude = '$launch_latitiude', pending_longitude = '$launch_longitude'
-WHERE"; 
+$sqlTwo = "UPDATE `Pending` P
+SET pending_latitude = '".$launch_latitiude."', pending_longitude = '".$launch_longitude."', pending_date = '".$launch_date."'
+WHERE P.satellite_id = (SELECT satellite_id FROM Satellites WHERE satellite_name = '".$satellite_name."')"; 
 
-//if data is entered successfully we rendeer the same page 
-if ($link->query($sql) === TRUE && $link->query($sqlTwo) ===TRUE) {
-  header("Location: /pages/insertSatellite.php?status=success");
 
-} else {
-  echo "Error: " . $sql . "<br>" . $link->error;
-  echo "Error: " . $sqlTwo . "<br>" . $link->error;
 
+if(!$mysqli->query($sql)) {
+  die("Error: Could not update satellite. " . $mysqli->error);
 }
 
-$link->close();
+if(!$mysqli->query($sqlTwo)) {
+  die("Error: Could not update satellite. " . $mysqli->error);
+}
 
+header("Location: ./updateSatellite.php?status=success");
 ?>
+
