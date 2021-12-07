@@ -44,7 +44,7 @@ VALUES (null, '$info', '$launch_date', '$launch_latitiude', '$launch_longitude')
 
 //if data is entered successfully we rendeer the same page 
 if ($mysqli->query($sql) === TRUE && $mysqli->query($sqlTwo) ===TRUE) {
-  header("Location: /pages/insertSatellite.php?status=success");
+  header("Location: ../pages/insertSatellite.php?status=success");
 
 
 } else {

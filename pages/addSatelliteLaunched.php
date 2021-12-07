@@ -28,11 +28,11 @@ while($row = mysqli_fetch_array($satID)){
 $size = sizeof($array)-1;
 $info = $array[$size]["satellite_id"]+1;
 
-$sqlTwo = "INSERT INTO `In-Orbit`(orbital_id, satellite_id, launch_date, launch_latitude, launch_longitude, altitude, inclination)
+$sqlTwo = "INSERT INTO `In-Orbit`(oid, satellite_id, launch_date, launch_latitude, launch_longitude, altitude, inclination)
 VALUES ($count, '$info', '$launch_date', '$launch_latitiude', '$launch_longitude', '$launch_altitude', '$launch_inclination')";
 
 if ($mysqli->query($sql) === TRUE && $mysqli->query($sqlTwo) ===TRUE) {
-  header("Location: /pages/insertSatellite.php?status=success");
+  header("Location: ../pages/insertSatellite.php?status=success");
 
 
 } else {
