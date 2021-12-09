@@ -58,11 +58,6 @@ if(isset($_POST["username"]) && isset($_POST["address"]) && isset($_POST["passwo
     <h2>Register an Account</h2>
         <form method="post">
             <div>
-                <?php
-                    if(!empty($register_err)){
-                        echo '<div class="alert alert-danger">' . $register_err . '</div>';
-                    }    
-                ?>
                 <label>Company Name</label><br>
                 <input type="text" name="username" class="form-control" pattern="[ a-zA-Z0-9'._]*" title="Invalid company name" required>
                 <br><br>
@@ -75,6 +70,11 @@ if(isset($_POST["username"]) && isset($_POST["address"]) && isset($_POST["passwo
                 <label>Confirm Password</label><br>
                 <input type="password" name="confirm_password" class="form-control" minlength="6" required>
                 <br><br>
+                <?php
+                    if(!empty($register_err)){
+                        echo '<div class="error">' . $register_err . '</div><br><br>';
+                    }    
+                ?>
                 <input type="submit" class="button" value="Create account"> 
                 <br><br>
             </div>
