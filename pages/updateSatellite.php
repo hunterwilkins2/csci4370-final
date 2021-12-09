@@ -133,7 +133,7 @@ $result2 = $mysqli->query($query2);
 		</div>	      	   
 
 		<div>
-	<button type="submit" name="submit">Submit</button>
+	<br><button type="submit" name="submit">Submit</button>
 		</div>
 
 	</form>
@@ -221,7 +221,7 @@ $result2 = $mysqli->query($query2);
 	</div>
 
 	<div>
-		<button type="submit" name="submit">Submit</button>
+		<br><button type="submit" name="submit">Submit</button>
 	</div>
 
 	</form>

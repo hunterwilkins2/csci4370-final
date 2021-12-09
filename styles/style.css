@@ -6,6 +6,7 @@ body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   background-color: #DDDDDD;
+  text-align: center;
 }
 
 .container {
@@ -16,12 +17,9 @@ body {
 
 header {
     flex: 0 1 3rem;
-
     padding: 10px;
-
     display: flex;
     align-items: center;
-
     color: #edf5e1;
     background-color: #222831;
 }
@@ -87,20 +85,9 @@ main {
 
 footer {
     flex: 0 1 2rem;
-
     text-align: center;
     color: #edf5e1;
     background-color: #30475E;
-}
-
-
-
-.formOne{
-    
-    padding: 20px;
-   
-  
-    
 }
 
 .success-msg{
@@ -108,3 +95,13 @@ footer {
     color: green;
  
 }
+
+button[type=submit] {
+    background-color: #222831;
+    color: white;
+    padding: 5px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+  }

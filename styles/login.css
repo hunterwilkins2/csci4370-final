@@ -34,12 +34,9 @@ input[type=submit] {
 /* header and nav */
 header {
     flex: 0 1 3rem;
-
     padding: 10px;
-
     display: flex;
     align-items: center;
-
     color: #edf5e1;
     background-color: #222831;
 }
