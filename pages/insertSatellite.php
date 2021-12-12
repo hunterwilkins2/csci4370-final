@@ -31,61 +31,58 @@
 			</a>
 			<nav>
 				<?php
-				if (isset($_COOKIE["cid"])) {
-					$nameSql = "SELECT company_name FROM Companies WHERE company_id = '" . $_COOKIE["cid"] . "'";
+					if (isset($_COOKIE["cid"])) {
+						$nameSql = "SELECT company_name FROM Companies WHERE company_id = '" . $_COOKIE["cid"] . "'";
 
-					if ($result = $mysqli->query($nameSql)) {
-						$name = $result->fetch_object()->company_name;
-						echo '<p>Welcome, ' . $name . '</p>';
-						echo '<a href="./insertSatellite.php">Add New Satellite</a>';
-						echo '<a href="./updateSatellite.php">Update Satellite</a>';
-						echo '<a href="?logout">Logout</a>';
-					}
+						if ($result = $mysqli->query($nameSql)) {
+							$name = $result->fetch_object()->company_name;
+							echo '<p>Welcome, ' . $name . '</p>';
+							echo '<a href="./insertSatellite.php">Add New Satellite</a>';
+							echo '<a href="./updateSatellite.php">Update Satellite</a>';
+							echo '<a href="?logout">Logout</a>';
+						}
 
-					if (isset($_GET['logout'])) {
-						unset($_COOKIE['cid']);
-						setcookie('cid', "", time() - 3600, '/');
-						header("Location: ../index.php");
+						if (isset($_GET['logout'])) {
+							unset($_COOKIE['cid']);
+							setcookie('cid', "", time() - 3600, '/');
+							header("Location: ../index.php");
+						}
+					} else {
+						header("Location: ../login/login.php");
 					}
-				} else {
-					header("Location: ../login/login.php");
-				}
 				?>
+			</nav>
 		</header>
 
 		<main>
-
 			<!-- Insert Launch Pending Satellite -->
 			<div class="formOne">
-
 				<form action="addSatellitePending.php" method="post">
-
 					<div>
 						<h2>Insert Launch Pending Satellite</h2>
 
 					</div>
 					<div>
 						<label>Satellite Model:</label>
-						<input type="text" name="Model" placeholder="Satellite Model" required>
+						<input type="text" name="Model" placeholder="Satellite Model" pattern="[ a-zA-Z0-9'._]*" title="Invalid model" required>
 					</div>
 
 					<div>
 						<label>Satellite Name:</label>
-						<input type="text" name="Name" placeholder="Satellite Name" required>
+						<input type="text" name="Name" placeholder="Satellite Name" pattern="[ a-zA-Z0-9'._]*" title="Invalid name" required>
 					</div>
 					<div>
 						<label>Launch Latitude:</label>
-						<input type="number" name="Lati" placeholder="Satellite Latitiude" required>
+						<input type="number" name="Lati" placeholder="Satellite Latitiude" min="-90" max="90" step="0.01" required>
 					</div>
 					<div>
 						<label>Launch Longitude:</label>
-						<input type="number" name="Longi" placeholder="Satellite Longitude" required>
+						<input type="number" name="Longi" placeholder="Satellite Longitude" min="-180" max="180" step="0.01" required>
 					</div>
 					<div>
 						<label>Pending Launch Date:</label>
-						<input type="date" name="Date" placeholder="Pending Launch Date" required>
+						<input type="date" name="Date" id="pending_date" placeholder="Pending Launch Date" required>
 					</div>
-
 
 					<div>
 						<br><button type="submit" name="submit">Submit</button>
@@ -96,66 +93,68 @@
 			<!-- Insert Launched Satellite -->
 			<div class="formTwo">
 				<form action="addSatelliteLaunched.php" method="post" class="formTwo">
-
 					<div>
 						<h2>Insert Launched Satellite</h2>
 
 						<div>
 							<label>Satellite Model:</label>
-							<input type="text" name="Model" placeholder="Satellite Model" required>
+							<input type="text" name="Model" placeholder="Satellite Model" pattern="[ a-zA-Z0-9'._]*" title="Invalid model" required>
 						</div>
 
 						<div>
 							<label>Satellite Name:</label>
-							<input type="text" name="Name" placeholder="Satellite Name" required>
+							<input type="text" name="Name" placeholder="Satellite Name" pattern="[ a-zA-Z0-9'._]*" title="Invalid name" required>
 						</div>
 						<div>
 							<label>Launch Latitude:</label>
-							<input type="number" name="Lati" placeholder="Satellite Latitude" required>
+							<script>
+								function setMin() {
+									document.getElementById("Incl").min = document.getElementById("Lati").value;
+								}
+							</script>
+							<input type="number" name="Lati" id="Lati" placeholder="Satellite Latitude" onchange="setMin()" min="-90" max="90" step="0.01" required>
 						</div>
 						<div>
 							<label>Launch Longitude:</label>
-							<input type="number" name="Longi" placeholder="Satellite Longitude" required>
+							<input type="number" name="Longi" placeholder="Satellite Longitude" min="-180" max="180" step="0.01" required>
 						</div>
 						<div>
 							<label>Launched Date:</label>
-							<input name="Date" placeholder="Launched Date" type="date">
+							<input name="Date" placeholder="Launched Date" id="launched_date" type="date">
 						</div>
 						<div>
 							<label>Altitude:</label>
-							<input name="Alt" type="number" placeholder="Altitiude" required>
+							<input name="Alt" type="number" placeholder="Altitiude" min="250" max="2000" step="0.01" required>
 						</div>
 						<div>
 							<label>Inclination:</label>
-							<input placeholder="Inclination" name="Incl" type="number" required>
+							<input placeholder="Inclination" name="Incl" id="Incl" type="number" step="0.01" title="Cannot be less than than latitude" required>
 						</div>
 
 						<div>
 							<br><button type="submit">Submit</button>
 						</div>
+						<script>
+							const today = new Date().toLocaleDateString('en-ca');
+							document.getElementById('pending_date').min = today;
+							document.getElementById('launched_date').max = today;
+						</script>
+					</div>
+
+					<div class="success-msg">
+						<?php
+							if ($_GET['status'] == 'success') :
+								echo 'Satellite Successfuly Entered';
+							endif;
+						?>
+					</div>
 				</form>
-
 			</div>
-
-			<div class="success-msg">
-				<?php
-				if ($_GET['status'] == 'success') :
-					echo 'Satellite Successfuly Entered';
-				endif;
-
-				?>
-			</div>
-
 		</main>
-	</div>
-	</form>
 
-	</main>
-
-	<footer>
-		<p>CSCI 4370 Group 5 &copy Satellite Tracker Group </p>
-	</footer>
+		<footer>
+			<p>CSCI 4370 Group 5 &copy Satellite Tracker Group </p>
+		</footer>
 	</div>
 </body>
-
 </html>
