@@ -57,12 +57,15 @@
             <div class="company-select">
                 <?php
                     $sql = 'SELECT * FROM Companies';
-                    error_reporting(E_ERROR | E_PARSE);
 
                     if ($result = $mysqli->query($sql)) {
                         while ($data = $result->fetch_object()) {
                             $companies[] = $data;
                         }
+                    }
+
+                    if(!isset($_GET['company']) && isset($name)) {
+                        $_GET['company'] = $name;
                     }
 
                     if(!isset($_GET['company'])) {
