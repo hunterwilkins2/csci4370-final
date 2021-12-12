@@ -82,8 +82,20 @@ $result2 = $mysqli->query($query2);
 					echo '<option value="'.$name->satellite_name.'">'.$name->satellite_name.'</option> ';
 				}
 			}
+
+			while ($row = $result2->fetch_object()) {
+				echo $row->satellite_name;
+				$orbit_names[] = $row;
+			}
+
+			if(!isset($_GET['orbit_name'])) {
+				$_GET['orbit_name'] = $orbit_names[0]->satellite_name;
+			}
 		?>
 		</select>
+		<?php
+			echo '<input type="hidden" name="orbit_name" value="'. $_GET['orbit_name'] .'" />';
+		?>
 	</form>
 	
 	<form action="updateLaunch.php" method="post">
@@ -99,7 +111,7 @@ $result2 = $mysqli->query($query2);
 		
 		<label>Satellite Name:</label>
 		<?php
-		echo '<input type="text" name="Name" value="'. $details_arr->satellite_name .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid name" readonly required>'
+		echo '<input type="text" name="Name" value="'. $details_arr->satellite_name .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid name" readonly required>';
 		?>
 	</select>
 		</div>
@@ -107,31 +119,30 @@ $result2 = $mysqli->query($query2);
 		<div>
 	<label>Satellite Model:</label>
 		<?php
-		echo '<input type="text" name="Model" value="'. $details_arr->model .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid model" required>'
+		echo '<input type="text" name="Model" value="'. $details_arr->model .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid model" required>';
 		?>
 		</div> 
 
 		<div>
 	<label>Launch Latitude:</label>
 		<?php
-		echo '<input type="number" name="Lati" value="'. $details_arr->pending_latitude .'" min="-90" max="90" step="0.01" required>'
+		echo '<input type="number" name="Lati" value="'. $details_arr->pending_latitude .'" min="-90" max="90" step="0.01" required>';
 		?>
 		</div>
 
 		<div>
 		<label>Launch Longitude:</label>
 		<?php
-		echo '<input type="number" name="Longi" value="'. $details_arr->pending_longitude .'" min="-90" max="90" step="0.01" required>'
+		echo '<input type="number" name="Longi" value="'. $details_arr->pending_longitude .'" min="-180" max="180" step="0.01" required>';
 		?>
 		</div>
 
 		<div>
 	<label>Pending Launch Date:</label>
 		<?php
-		echo '<input type="date" name="Date" value="'. $details_arr->launch_date .'" required>'
+		echo '<input type="date" name="Date" value="'. $details_arr->pending_date .'" required>';
 		?>
-		</div>	      	   
-
+		</div>	      
 		<div>
 	<br><button type="submit" name="submit">Submit</button>
 		</div>
@@ -142,19 +153,11 @@ $result2 = $mysqli->query($query2);
 	<!-- This code updates satellites which are in orbit -->
 	<div class="formTwo">
 	<h2>Update Satellite Location</h2>
-	<form method="get" id="satelliteName">
-		<select name="name" onchange="this.form.submit()">
+	<form method="get" id="satellite_orbit">
+		<select name="orbit_name" onchange="this.form.submit()">
 		<?php
-			while ($row = $result2->fetch_object()) {
-				$names[] = $row;
-			}
-
-			if(!isset($_GET['name'])) {
-				$_GET['name'] = $names[0]->satellite_name;
-			}
-
-			foreach($names as $name) {
-				if($name->satellite_name == $_GET['name']) {
+			foreach($orbit_names as $name) {
+				if($name->satellite_name == $_GET['orbit_name']) {
 					echo '<option value="'.$name->satellite_name.'" selected>'.$name->satellite_name.'</option> ';
 				} else {
 					echo '<option value="'.$name->satellite_name.'">'.$name->satellite_name.'</option> ';
@@ -162,11 +165,14 @@ $result2 = $mysqli->query($query2);
 			}
 		?>
 		</select>
+		<?php
+			echo '<input type="hidden" name="name" value="'. $_GET['name'] .'" />';
+		?>
 	</form>
 
 	<form action="updateLocation.php" method="post">	
 		<?php
-		$details = "SELECT * FROM `In-Orbit` I INNER JOIN (SELECT * FROM Satellites S WHERE S.satellite_name = '".$_GET['name']."') N ON N.satellite_id = I.satellite_id";
+		$details = "SELECT * FROM `In-Orbit` I INNER JOIN (SELECT * FROM Satellites S WHERE S.satellite_name = '".$_GET['orbit_name']."') N ON N.satellite_id = I.satellite_id";
 		if($details_result = $mysqli->query($details)) {
 			while ($data = $details_result->fetch_object()) {
 				$details_arr = $data;
@@ -185,18 +191,18 @@ $result2 = $mysqli->query($query2);
 	echo '<input type="text" name="Model" value="'. $details_arr->model .'" pattern="[ a-zA-Z0-9\'._]*" title="Invalid model" required>';
 	?>
 		</div>
-
-	<div>
-		<label>Satelite New Longitude:</label>
-		<?php
-		echo '<input type="number" name="Longi" value="'. $details_arr->launch_longitude.'" min="-90" max="90" step="0.01" required>'
-		?>
-	</div>
 	
 	<div>
 		<label>Satelite New Latitude:</label>
 		<?php
 		echo '<input type="number" name="Lati" id="lat" onchange="setMin()" value="'. $details_arr->launch_latitude.'" min="-90" max="90" step="0.01" required>'
+		?>
+	</div>
+
+	<div>
+		<label>Satelite New Longitude:</label>
+		<?php
+		echo '<input type="number" name="Longi" value="'. $details_arr->launch_longitude.'" min="-180" max="180" step="0.01" required>'
 		?>
 	</div>
 
